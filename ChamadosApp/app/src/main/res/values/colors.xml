@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores da Logo Resolve TI -->
+    <color name="resolve_orange">#FC6604</color>
+    <color name="resolve_orange_dark">#E54305</color>
+    <color name="resolve_gray_dark">#2B353C</color>
+    <color name="resolve_gray_light">#545D63</color>
+    <color name="resolve_black">#131314</color>
+    
+    <!-- Cores de Suporte Modernas -->
+    <color name="background_light">#F8F9FA</color>
+    <color name="card_white">#FFFFFF</color>
+    <color name="text_primary">#131314</color>
+    <color name="text_secondary">#545D63</color>
+    <color name="divider">#E0E0E0</color>
+    
+    <!-- Status -->
+    <color name="status_open">#E54305</color>
+    <color name="status_progress">#FC6604</color>
+    <color name="status_done">#2E7D32</color> <!-- Verde para concluído fica mais moderno -->
+    
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Cores de compatibilidade (Mapeadas para o novo tema) -->
+    <color name="fundo_claro">@color/background_light</color>
+    <color name="fundo_medio">@color/divider</color>
+    <color name="cinza_escuro">@color/resolve_gray_dark</color>
+    <color name="cinza_claro">@color/resolve_gray_light</color>
+    <color name="laranja_claro">@color/resolve_orange</color>
+    <color name="laranja_escuro">@color/resolve_orange_dark</color>
+    <color name="marrom">@color/resolve_orange_dark</color>
+</resources>

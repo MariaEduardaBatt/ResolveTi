@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fundo_claro"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtrar Chamados"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/cinza_escuro"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Por Status:"
+        android:textColor="@color/cinza_escuro"
+        android:layout_marginBottom="4dp"/>
+
+    <Spinner
+        android:id="@+id/filter_spinner_status"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/fundo_medio"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Por Tipo:"
+        android:textColor="@color/cinza_escuro"
+        android:layout_marginBottom="4dp"/>
+
+    <Spinner
+        android:id="@+id/filter_spinner_tipo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/fundo_medio"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data Início (DD/MM/AAAA):"
+        android:textColor="@color/cinza_escuro"
+        android:layout_marginBottom="4dp"/>
+
+    <EditText
+        android:id="@+id/filter_data_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ex: 01/05/2026"
+        android:background="@color/fundo_medio"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data Fim (DD/MM/AAAA):"
+        android:textColor="@color/cinza_escuro"
+        android:layout_marginBottom="4dp"/>
+
+    <EditText
+        android:id="@+id/filter_data_fim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ex: 31/05/2026"
+        android:background="@color/fundo_medio"
+        android:padding="12dp"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/btn_aplicar_filtros"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Aplicar Filtros"
+        android:backgroundTint="@color/laranja_claro"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
