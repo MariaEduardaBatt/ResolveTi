@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".ChamadosApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo_resolve"
         android:label="Resolve TI"
         android:supportsRtl="true"
         android:theme="@style/Theme.ResolveTI">
-        
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.empresa.chamados.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
@@ -16,12 +30,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name=".activities.NovoChamadoActivity" />
         <activity android:name=".activities.ListaChamadosActivity" />
         <activity android:name=".activities.AtendimentoChamadoActivity" />
         <activity android:name=".activities.FiltrosChamadosActivity" />
-        
+        <activity android:name=".activities.EstatisticasActivity" />
+        <activity android:name=".activities.SobreActivity" />
+
     </application>
 
 </manifest>

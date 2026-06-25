@@ -1,23 +1,29 @@
 package com.empresa.chamados.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.bumptech.glide.Glide;
 import com.empresa.chamados.R;
 import com.empresa.chamados.database.ChamadoDAO;
 import com.empresa.chamados.models.Chamado;
 import com.empresa.chamados.utils.DateUtils;
+
+import java.io.File;
 
 public class AtendimentoChamadoActivity extends AppCompatActivity {
 
     private TextView txtTitulo, txtInfo, txtDescricao;
     private EditText editSolucao;
     private Spinner spinnerStatus;
+    private ImageView imgImagem;
     private Chamado chamado;
     private ChamadoDAO dao;
 
@@ -37,16 +43,26 @@ public class AtendimentoChamadoActivity extends AppCompatActivity {
         txtDescricao = findViewById(R.id.atend_descricao);
         editSolucao = findViewById(R.id.edit_solucao);
         spinnerStatus = findViewById(R.id.spinner_status);
+        imgImagem = findViewById(R.id.atend_imagem);
         Button btnSalvar = findViewById(R.id.btn_salvar_atendimento);
 
         if (chamado != null) {
             txtTitulo.setText(chamado.getTitulo());
-            txtInfo.setText(chamado.getTipo() + " | " + chamado.getLocal() + " | " + chamado.getData());
+            String status = chamado.getStatus() != null ? chamado.getStatus() : "Aberto";
+            txtInfo.setText(chamado.getLocal() + " | " + chamado.getData() + " | " + status);
             txtDescricao.setText(chamado.getDescricao());
             editSolucao.setText(chamado.getSolucao());
+
+            if (chamado.getImagem() != null && !chamado.getImagem().isEmpty()) {
+                imgImagem.setVisibility(ImageView.VISIBLE);
+                Glide.with(this)
+                        .load(Uri.fromFile(new File(chamado.getImagem())))
+                        .centerCrop()
+                        .into(imgImagem);
+            }
         }
 
-        String[] statusOpcoes = {"Aberto", "Em Atendimento", "Concluído"};
+        String[] statusOpcoes = {"Aberto", "Em andamento", "Concluído"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, statusOpcoes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerStatus.setAdapter(adapter);
@@ -83,6 +99,8 @@ public class AtendimentoChamadoActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dao.close();
+        if (dao != null) {
+            dao.close();
+        }
     }
 }

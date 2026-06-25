@@ -25,7 +25,7 @@ public class FiltrosChamadosActivity extends AppCompatActivity {
         editDataFim = findViewById(R.id.filter_data_fim);
         Button btnAplicar = findViewById(R.id.btn_aplicar_filtros);
 
-        String[] statusOpcoes = {"", "Aberto", "Em Atendimento", "Concluído"};
+        String[] statusOpcoes = {"", "Aberto", "Em andamento", "Concluído"};
         ArrayAdapter<String> adapterStatus = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, statusOpcoes);
         spinnerStatus.setAdapter(adapterStatus);
 

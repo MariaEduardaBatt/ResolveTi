@@ -32,6 +32,7 @@ public class ChamadoDAO {
         values.put(DatabaseHelper.COLUMN_LOCAL, chamado.getLocal());
         values.put(DatabaseHelper.COLUMN_TIPO, chamado.getTipo());
         values.put(DatabaseHelper.COLUMN_STATUS, chamado.getStatus());
+        values.put(DatabaseHelper.COLUMN_IMAGEM, chamado.getImagem());
         return db.insert(DatabaseHelper.TABLE_CHAMADOS, null, values);
     }
 
@@ -95,6 +96,22 @@ public class ChamadoDAO {
         return null;
     }
 
+    public int contarTotal() {
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + DatabaseHelper.TABLE_CHAMADOS, null);
+        cursor.moveToFirst();
+        int total = cursor.getInt(0);
+        cursor.close();
+        return total;
+    }
+
+    public int contarPorStatus(String status) {
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + DatabaseHelper.TABLE_CHAMADOS + " WHERE " + DatabaseHelper.COLUMN_STATUS + " = ?", new String[]{status});
+        cursor.moveToFirst();
+        int total = cursor.getInt(0);
+        cursor.close();
+        return total;
+    }
+
     private Chamado cursorToChamado(Cursor cursor) {
         Chamado c = new Chamado();
         c.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_ID)));
@@ -106,6 +123,9 @@ public class ChamadoDAO {
         c.setStatus(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_STATUS)));
         c.setSolucao(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_SOLUCAO)));
         c.setDataAtendimento(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_DATA_ATENDIMENTO)));
+        if (cursor.getColumnIndex(DatabaseHelper.COLUMN_IMAGEM) >= 0) {
+            c.setImagem(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_IMAGEM)));
+        }
         return c;
     }
 }

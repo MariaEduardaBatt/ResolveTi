@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.empresa.chamados.R;
 import com.empresa.chamados.adapters.ChamadosAdapter;
 import com.empresa.chamados.database.ChamadoDAO;
@@ -24,6 +25,9 @@ public class ListaChamadosActivity extends AppCompatActivity {
         dao = new ChamadoDAO(this);
         dao.open();
 
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         recyclerView = findViewById(R.id.recycler_chamados);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -35,7 +39,6 @@ public class ListaChamadosActivity extends AppCompatActivity {
     }
 
     private void carregarLista() {
-        // Verifica se veio de filtros
         String status = getIntent().getStringExtra("filterStatus");
         String dataIni = getIntent().getStringExtra("filterDataIni");
         String dataFim = getIntent().getStringExtra("filterDataFim");
@@ -55,12 +58,16 @@ public class ListaChamadosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        carregarLista();
+        if (dao != null) {
+            carregarLista();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dao.close();
+        if (dao != null) {
+            dao.close();
+        }
     }
 }

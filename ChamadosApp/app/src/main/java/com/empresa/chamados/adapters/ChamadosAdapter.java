@@ -2,16 +2,20 @@ package com.empresa.chamados.adapters;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import com.empresa.chamados.R;
 import com.empresa.chamados.activities.AtendimentoChamadoActivity;
 import com.empresa.chamados.models.Chamado;
+import java.io.File;
 import java.util.List;
 
 public class ChamadosAdapter extends RecyclerView.Adapter<ChamadosAdapter.ViewHolder> {
@@ -37,20 +41,29 @@ public class ChamadosAdapter extends RecyclerView.Adapter<ChamadosAdapter.ViewHo
         holder.txtLocal.setText(c.getLocal());
         holder.txtStatus.setText(c.getStatus());
 
-        // Cores do PRD
         int corStatus;
         switch (c.getStatus()) {
-            case "Em Atendimento":
+            case "Em andamento":
                 corStatus = ContextCompat.getColor(holder.itemView.getContext(), R.color.laranja_claro);
                 break;
             case "Concluído":
-                corStatus = ContextCompat.getColor(holder.itemView.getContext(), R.color.marrom);
+                corStatus = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_done);
                 break;
-            default: // Aberto
+            default:
                 corStatus = ContextCompat.getColor(holder.itemView.getContext(), R.color.laranja_escuro);
                 break;
         }
         holder.txtStatus.setBackgroundColor(corStatus);
+
+        if (c.getImagem() != null && !c.getImagem().isEmpty()) {
+            holder.imgImagem.setVisibility(ImageView.VISIBLE);
+            Glide.with(holder.itemView.getContext())
+                    .load(Uri.fromFile(new File(c.getImagem())))
+                    .centerCrop()
+                    .into(holder.imgImagem);
+        } else {
+            holder.imgImagem.setVisibility(ImageView.GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), AtendimentoChamadoActivity.class);
@@ -66,12 +79,14 @@ public class ChamadosAdapter extends RecyclerView.Adapter<ChamadosAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitulo, txtData, txtLocal, txtStatus;
+        ImageView imgImagem;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitulo = itemView.findViewById(R.id.item_titulo);
             txtData = itemView.findViewById(R.id.item_data);
             txtLocal = itemView.findViewById(R.id.item_local);
             txtStatus = itemView.findViewById(R.id.item_status);
+            imgImagem = itemView.findViewById(R.id.item_imagem);
         }
     }
 }

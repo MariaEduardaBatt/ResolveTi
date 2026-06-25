@@ -8,14 +8,14 @@ public class Chamado implements Serializable {
     private String data;
     private String descricao;
     private String local;
-    private String tipo; // "Infraestrutura" ou "TI"
-    private String status; // "Aberto", "Em Atendimento", "Concluído"
+    private String tipo;
+    private String status;
     private String solucao;
     private String dataAtendimento;
+    private String imagem;
 
     public Chamado() {}
 
-    // Getters e Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getTitulo() { return titulo; }
@@ -34,4 +34,6 @@ public class Chamado implements Serializable {
     public void setSolucao(String solucao) { this.solucao = solucao; }
     public String getDataAtendimento() { return dataAtendimento; }
     public void setDataAtendimento(String dataAtendimento) { this.dataAtendimento = dataAtendimento; }
+    public String getImagem() { return imagem; }
+    public void setImagem(String imagem) { this.imagem = imagem; }
 }
